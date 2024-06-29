@@ -1,0 +1,93 @@
+<nz-layout class="h-full w-full">
+  <nz-sider nzWidth="13vw" style="min-width: 280px;" nzTheme="dark" class=" p-3 bg-body-tertiary">
+    <div class="logo">
+      <img src="../assets/images/logo.jpg" class="h-3/4 rounded-2xl" />
+      <div class="text-white text-xl content-center text-center pt-3"> Uni Navigator </div>
+    </div>
+    <div>
+      <nz-divider />
+      <div style="text-align: center" nzAlign="end" class="space-align-block">
+        
+      <ng-container *ngIf="!loggedIn">
+        <div>
+          <button
+            nz-button
+            nzType="primary"
+            nzShape="round"
+            (click)="openLogin()"
+            class="mr-2"
+          >
+            Login
+          </button>
+          <button
+            nz-button
+            nzType="primary"
+            nzShape="round"
+            (click)="openRegister()"
+            class="ml-2"
+          >
+            Register
+          </button>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="loggedIn">
+        <div>
+          <button
+            nz-button
+            nzType="default"
+            (click)="profileNavigate()"
+            class="mr-2"
+          >
+            <span nz-icon nzType="user" nzTheme="outline"></span>
+          </button>
+          <button nz-button nzType="text" (click)="logout()" class="ml-2">
+            <span nz-icon nzType="logout" nzTheme="outline"></span>
+          </button>
+        </div>
+      </ng-container>
+      </div>
+    </div>
+    <nz-divider />
+    <div class="d-flex flex-column justify-content-between" style="height: 80%">
+      <ul nz-menu nzMode="vertical" nzTheme="dark">
+        <li nz-menu-item routerLink="Home" nzMatchRouter="true">
+          <span nz-icon nzType="home" nzTheme="fill"></span>
+          <span>Home</span>
+        </li>
+        <li nz-menu-item routerLink="Map" nzMatchRouter="true">
+          <span nz-icon nzType="compass" nzTheme="fill"></span>
+          <span>Map</span>
+        </li>
+        <li nz-menu-item routerLink="Events" nzMatchRouter="true">
+          <span nz-icon nzType="calendar" nzTheme="fill"></span>
+          <span>Events</span>
+        </li>
+        <ng-container *ngIf="loggedIn && isAdmin()">
+        <nz-divider nzPlain nzText="Admin"></nz-divider>
+        <li nz-menu-item routerLink="CreateEvent" nzMatchRouter="true">
+          <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
+          <span> Add Event </span>
+        </li>
+        <li nz-menu-item routerLink="AR-Editor" nzMatchRouter="true">
+          <span nz-icon nzType="video-camera" nzTheme="outline"></span>
+          <span> AR Editor </span>
+        </li>
+        <li nz-menu-item routerLink="Users" nzMatchRouter="true">
+          <span nz-icon nzType="unordered-list" nzTheme="outline"></span>
+          <span> Manage Users </span>
+        </li>
+        <li nz-menu-item routerLink="Roles" nzMatchRouter="true">
+          <span nz-icon nzType="user-switch" nzTheme="outline"></span>
+          <span> Manage Roles </span>
+        </li>
+        </ng-container>
+      </ul>
+    </div>
+  </nz-sider>
+  <nz-layout>
+    <nz-content [ngClass]="{'overflow-hidden': isMapRoute, 'overflow-scroll': !isMapRoute}" class="bg-slate-900">
+      <nz-page-header [nzGhost]="false" nzBackIcon [nzTitle]="title"></nz-page-header>
+      <router-outlet></router-outlet>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

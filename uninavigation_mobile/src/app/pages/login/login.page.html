@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Login</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="login()" [strong]="true">Log in</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-input
+        [(ngModel)]="loginModel.username"
+        type="text"
+        label="Username"
+        labelPlacement="fixed"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        [(ngModel)]="loginModel.password"
+        type="password"
+        label="Password"
+        labelPlacement="fixed"
+      ></ion-input>
+    </ion-item>
+    <p *ngIf="loginFailed" style="color: red">
+      Username or password is incorrect
+    </p>
+  </ion-list>
+  <div style="padding-top: 15px;">
+    <span>Don't have an account? </span>
+    <a (click)="signup()">Sign up</a>
+  </div>
+</ion-content>

@@ -1,0 +1,60 @@
+<form nz-form [formGroup]="editForm">
+    <nz-form-item>
+        <nz-form-label [nzFor]="'location'" nzRequired nzSpan="6"
+          >Location</nz-form-label
+        >
+        <nz-form-control nzErrorTip="Please select the event location!" nzSpan="10">
+          <nz-select
+            formControlName="roomName"
+            id="roomName"
+            [nzPlaceHolder]="'Location'"
+            nzShowSearch
+            [ngModel]="content.roomName"
+          >
+            <nz-option
+              *ngFor="let location of locations"
+              [nzValue]="location.name"
+              [nzLabel]="location.name"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">Elevation</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input type="number" formControlName="elevation" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">Longitude</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input formControlName="longitude" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">Latitude</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input formControlName="latitude" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired>Content</nz-form-label>
+        <nz-form-control [nzSpan]="14" nzErrorTip="Please upload a valid file!">
+          <input type="file" (change)="onFileSelected($event)" (change)="CreateBase64String($event)" formControlName="content" [class.is-invalid]="editForm.get('content')?.invalid && editForm.get('content')?.touched" />
+          <p style="color: rgba(255, 255, 255, 0.45);">
+            Only JPG, JPEG, PNG are allowed. (max size 15MB)
+          </p>
+          
+        </nz-form-control>
+      </nz-form-item>
+  </form>
+
+  <ng-container *nzModalFooter>
+    <button nz-button nzType="primary" (click)="saveChanges()">
+      Update
+    </button>
+    <button nz-button nzType="dashed" (click)="cancel()">
+      Cancel
+    </button>
+  </ng-container>
+  

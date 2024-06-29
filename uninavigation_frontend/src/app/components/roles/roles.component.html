@@ -1,0 +1,84 @@
+<div class="m-10">
+  <nz-divider nzText="Role Management"></nz-divider>
+  <div class="p-7">
+    <div class="role-creation">
+      <nz-divider nzText="New Role" nzOrientation="left" nzDashed="true" class="mb-3"></nz-divider>
+      <div class="flex flex-row gap-2 pl-10 pr-10">
+        <nz-input-group nzPrefixIcon="usergroup-add" nzSize="large">
+          <input nz-input [(ngModel)]="newRole" placeholder="Enter role name"/>
+        </nz-input-group>
+        <button
+          nz-button
+          nzType="primary"
+          nzSize="large"
+          (click)="createRole(newRole)"
+          [disabled]="!newRole"
+          class="create-button"
+        >
+          Create Role
+        </button>
+      </div>
+      
+    </div>
+    <div class="role-assignment">
+      <nz-divider nzText="Assign Role" nzOrientation="left" nzDashed="true" class="mb-3"></nz-divider>
+      <div class="flex flex-row gap-4 justify-center">
+        <nz-select
+          [(ngModel)]="selectedUser"
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="Select user"
+          nzSize="large"
+          class="w-2/6"
+        >
+          <nz-option
+            *ngFor="let user of users"
+            [nzValue]="user.userId"
+            [nzLabel]="user.firstName + ' ' + user.lastName"
+          >
+          </nz-option>
+        </nz-select>
+        <nz-select
+          [(ngModel)]="selectedRole"
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="Select role"
+          nzSize="large"
+          class="w-2/6"
+        >
+          <nz-option
+            *ngFor="let role of roles"
+            [nzValue]="role.id"
+            [nzLabel]="role.name"
+          >
+          </nz-option>
+        </nz-select>
+
+      <button
+      [disabled]="!selectedUser || !selectedRole"
+      nz-button
+      nzType="primary"
+      nzSize="large"
+      (click)="assignRole()"
+      class="assign-button"
+    >
+      Assign
+    </button>
+      </div>
+    </div>
+  
+    <div class="role-management">
+      <nz-divider nzText="Current Roles" nzOrientation="left" nzDashed="true" class="mb-3"></nz-divider>
+      <div class="pl-20 pr-20">
+        <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
+          @for (item of roles; track item) {
+          <nz-list-item>
+            <nz-list-item-meta nzTitle="{{ item.name }}"></nz-list-item-meta>
+            <button nz-button nzDanger (click)="deleteRole(item.id)" class="remove-button">Remove</button>
+          </nz-list-item>
+          }
+        </nz-list>
+      </div>
+    </div>
+  </div>
+</div>

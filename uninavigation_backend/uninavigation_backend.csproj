@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Controllers\" />
+    <None Remove="Data\" />
+    <None Remove="Models\" />
+    <None Remove="Models\RelationModels\" />
+    <None Remove="Models\DTOs\" />
+    <None Remove="Logic\" />
+    <None Remove="Logic\Classes\" />
+    <None Remove="Logic\Interfaces\" />
+    <None Remove="Repositories\" />
+    <None Remove="Repositories\Classes\" />
+    <None Remove="Repositories\Interfaces\" />
+    <None Remove="Data\Migrations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Models\RelationModels\" />
+    <Folder Include="Models\DTOs\" />
+    <Folder Include="Logic\" />
+    <Folder Include="Logic\Classes\" />
+    <Folder Include="Logic\Interfaces\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Repositories\Classes\" />
+    <Folder Include="Repositories\Interfaces\" />
+    <Folder Include="Data\Migrations\" />
+  </ItemGroup>
+</Project>

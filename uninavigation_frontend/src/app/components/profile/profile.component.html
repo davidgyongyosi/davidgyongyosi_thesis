@@ -1,0 +1,113 @@
+<div class="info-container">
+  <div class="header">
+    <div class="info">
+      <div class="image">
+        <img *ngIf="user.picture != null " [src]="user.picture" alt="" width="200px">
+        <img *ngIf="user.picture == null " src="../../../assets/images/prof-pic.png" alt="" width="200px">
+      </div>
+      <h3 class="name text-2xl">{{ user.firstName }} {{ user.lastName }}</h3>
+    </div>
+  </div>
+  <nz-tabset nzCentered>
+    <nz-tab nzTitle="Details">
+      <div class="content-container">
+        <div class="content-body">
+          <div class="user-info">
+            <h3>First Name:</h3>
+            <div>
+              <span *ngIf="!isEditing">{{user.firstName}}</span>
+              <nz-input-group *ngIf="isEditing" nzCompact>
+                <input type="text" nz-input [(ngModel)]="user.firstName" />
+              </nz-input-group>
+            </div>
+          </div>
+          <nz-divider></nz-divider>
+          <div class="user-info">
+            <h3>Last Name:</h3>
+            <div>
+              <span *ngIf="!isEditing">{{user.lastName}}</span>
+              <nz-input-group *ngIf="isEditing" nzCompact>
+                <input type="text" nz-input [(ngModel)]="user.lastName" />
+              </nz-input-group>
+            </div>
+          </div>
+          <nz-divider></nz-divider>
+          <div class="user-info">
+            <h3>Email:</h3>
+            <div>
+              <span *ngIf="!isEditing">{{user.email}}</span>
+              <nz-input-group *ngIf="isEditing" nzCompact>
+                <input type="text" nz-input [(ngModel)]="user.email" />
+              </nz-input-group>
+            </div>
+          </div>
+          <nz-divider></nz-divider>
+          <div class="flex gap-4">
+            <button nz-button nzType="primary" nzSize="large" (click)="toggleEdit()" *ngIf="!isEditing">Update information</button>
+            <button nz-button nzType="primary" nzSize="large" *ngIf="isEditing" (click)="saveChanges()" [disabled]="this.error != ''">
+              <i nz-icon nzType="save" nzTheme="outline"></i>
+            </button>
+            <button nz-button nzType="default" nzSize="large" (click)="cancelChanges()" *ngIf="isEditing">Cancel Changes</button>
+            <button nz-button nzType="primary" nzSize="large" nzDanger (click)="deleteAccount()" nz-tooltip="Delete Account" nzTooltipColor="red">
+              <span nz-icon nzType="delete" nzTheme="outline"></span>
+            </button>
+            <nz-form-item *ngIf="isEditing">
+              <nz-form-label [nzFor]="'file'" nzRequired>Upload Profile Picture</nz-form-label>
+              <nz-form-control>
+                <input type="file" id="file" (change)="CreateBase64String($event)" accept="image/*">
+                <div *ngIf="error" nz-form-explain>{{ error }}</div>
+              </nz-form-control>
+            </nz-form-item>
+            
+          </div>
+        </div>
+      </div>
+    </nz-tab>    
+    <nz-tab nzTitle="Events">
+      <div class="flex flex-wrap gap-7 justify-evenly p-7">
+        <ng-container *ngFor="let event of events">
+          <nz-card style="width: 400px" [nzCover]="coverTemplate">
+            <nz-card-meta
+              nzTitle="{{ event.name }}"
+              nzDescription="{{ event.startTime | date : 'EEE, MMM dd, h:mm a' }} – {{
+                event.endTime | date : 'EEE, MMM dd, h:mm a'
+              }}"
+            >
+            </nz-card-meta>
+            <div class="mt-4 mb-1 flex flex-col gap-4">
+              <div>
+                {{ event.description }}
+              </div>
+              <div class="flex flex-row gap-4 justify-between">
+                <p nz-tooltip nzTooltipTitle="Location on the map"
+                  ><i class="bi bi-pin-map"></i> &nbsp; {{ event.location?.name }}</p>
+                <p nz-tooltip nzTooltipTitle="Number of participants on the event">
+                  <i class="bi bi-eye"></i> &nbsp; {{ event.participants?.length }}</p>
+              </div>
+              <div class="w-full">
+                <nz-divider />
+                <button
+                  nz-button
+                  nzType="primary"
+                  nzDanger
+                  class="float-right"
+                  (click)="unattendEvent(event.eventId!)"
+                >
+                  Unattend Event
+                </button>
+              </div>
+            </div>
+          </nz-card>
+          <ng-template #coverTemplate>
+            <img
+          alt="{{ event.name }}"
+          [src]="getBase64ImageSrc(event.data!, event.contentType!)"
+        />
+          </ng-template>
+        </ng-container>
+      </div>
+      
+    </nz-tab>
+  </nz-tabset>
+  
+</div>

@@ -1,0 +1,50 @@
+.info-container {
+    ion-avatar {
+      margin: auto;
+      display: block;
+      --border-radius: 50%;
+      width: 100px; /* Adjust based on design */
+      height: 100px; /* Adjust based on design */
+      overflow: hidden;
+      img {
+        max-width: 100%;
+      }
+    }
+    .name {
+      text-align: center;
+      margin-top: 8px;
+    }
+  }
+  
+  .header {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+  }
+  
+  .content-container {
+    padding: 16px;
+  }
+  
+  .user-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+    align-items: center;
+  }
+  
+  .inputs {
+    ion-item {
+      --padding-start: 0;
+      --inner-padding-end: 0;
+    }
+  }
+  
+  .content-footer {
+    display: flex;
+    justify-content: center;
+    ion-button {
+      margin: 0 8px;
+    }
+  }
+  

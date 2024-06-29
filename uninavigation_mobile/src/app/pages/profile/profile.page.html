@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="info-container">
+    <div class="header">
+      <div class="info">
+        <ion-avatar class="image">
+          <img *ngIf="user.picture; else defaultPicture" [src]="user.picture">
+          <ng-template #defaultPicture>
+            <img src="../../../assets/images/prof-pic.png">
+          </ng-template>
+        </ion-avatar>
+        <h3 class="name">{{ user.firstName }} {{ user.lastName }}</h3>
+      </div>
+    </div>
+
+    <ion-segment [(ngModel)]="segment">
+    
+      <ion-segment-button value="details">
+        Details
+      </ion-segment-button>
+      <ion-segment-button value="events">
+        Events
+      </ion-segment-button>
+    </ion-segment>
+  
+  
+    <div [ngSwitch]="segment">
+      <ion-card *ngSwitchCase="'details'">
+        <ion-card-header>
+          <ion-card-title>Details</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="content-container">
+            <div class="content-body">
+              <div class="user-info">
+                <h3>First Name:</h3>
+                <div>
+                  <span>{{user.firstName}}</span>
+                </div>
+              </div>
+              <div class="user-info">
+                <h3>Last Name:</h3>
+                <div>
+                  <span>{{user.lastName}}</span>
+                </div>
+              </div>
+              <div class="user-info">
+                <h3>Email:</h3>
+                <div>
+                  <span>{{user.email}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    
+      <ion-card *ngSwitchCase="'events'">
+        <ion-card-header>
+          <ion-card-title>Events</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="flex flex-wrap gap-7 justify-evenly p-7">
+            <ng-container *ngFor="let event of events">
+              <ion-card style="width: 400px">
+                <ion-img [src]="getBase64ImageSrc(event.data!, event.contentType!)" alt="{{ event.name }}"></ion-img>
+                <ion-card-header>
+                  <ion-card-title>{{ event.name }}</ion-card-title>
+                  <ion-card-subtitle>
+                    {{ event.startTime | date: 'EEE, MMM dd, h:mm a' }} – {{ event.endTime | date: 'EEE, MMM dd, h:mm a' }}
+                  </ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content>
+                  <div class="mt-4 mb-1 flex flex-col gap-4">
+                    <div>{{ event.description }}</div>
+                    <div class="flex flex-row gap-4 justify-between">
+                      <p>
+                        <ion-icon name="pin"></ion-icon> &nbsp; {{ event.location?.name }}
+                      </p>
+                      <p>
+                        <ion-icon name="eye"></ion-icon> &nbsp; {{ event.participants?.length }}
+                      </p>
+                    </div>
+                    <ion-button expand="block" color="danger" class="float-right" (click)="unattendEvent(event.eventId!)">
+                      Unattend Event
+                    </ion-button>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ng-container>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

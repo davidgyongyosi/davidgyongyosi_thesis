@@ -1,0 +1,80 @@
+<div
+  *ngIf="isLoading"
+  class="absolute w-full h-full bg-slate-900 z-10 flex justify-center items-center pr-48 pb-32"
+>
+  <nz-spin nzTip="Loading events..." nzSize="large" class="w-full"></nz-spin>
+</div>
+
+<div class="flex flex-wrap gap-7 justify-evenly p-7" *ngIf="isLoading == false">
+  <ng-container *ngFor="let event of events">
+    <nz-card style="width: 400px;" [nzCover]="coverTemplate">
+      <nz-card-meta
+        nzTitle="{{ event.name }}"
+        nzDescription="{{ event.startTime | date : 'EEE, MMM dd, h:mm a' }} – {{
+          event.endTime | date : 'EEE, MMM dd, h:mm a'
+        }}"
+      >
+      </nz-card-meta>
+      <div class="mt-4 mb-1 flex flex-col gap-4">
+        <div>
+          {{ event.description }}
+        </div>
+        <div class="flex flex-row gap-4 justify-between">
+          <p nz-tooltip nzTooltipTitle="Location on the map"
+            ><i class="bi bi-pin-map"></i> &nbsp; {{ event.location?.name }}</p>
+          <p nz-tooltip nzTooltipTitle="Number of participants on the event">
+            <i class="bi bi-eye"></i> &nbsp; {{ event.participants?.length }}
+          </p>
+        </div>
+        <div *ngIf="userLoggedIn" class="w-full">
+          <nz-divider />
+          <div *ngIf="!eventHasEnded(event.endTime!)">
+            <button
+              nz-button
+              nzType="primary"
+              class="float-right"
+              *ngIf="!isUserAttending(event); else attendedTemplate"
+              (click)="attendEvent(event.eventId!)"
+            >
+              Attend Event
+            </button>
+            <ng-template #attendedTemplate>
+              <button nz-button nzType="default" class="float-right" disabled>
+                Already Attended
+              </button>
+            </ng-template>
+            <button nz-button nzType="text" *ngIf="userLoggedIn && userIsAdmin" (click)="openEditModal(event)">
+              <span nz-icon nzType="edit" nzTheme="outline"></span>
+            </button>
+          </div>
+          <div *ngIf="eventHasEnded(event.endTime!)">
+            <p class="text-red-500 text-lg float-left">Event has ended</p>
+            <button nz-button nzType="primary" class="float-right" nzDanger *ngIf="userLoggedIn && userIsAdmin" (click)="deleteEvent(event.eventId!)">
+              <span nz-icon nzType="delete" nzTheme="outline"></span> Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </nz-card>
+    <ng-template #coverTemplate>
+      <nz-water-mark [ngClass]="{ 'opacity-50': eventHasEnded(event.endTime!) }" *ngIf="eventHasEnded(event.endTime!)"
+      [nzWidth]="200"
+      [nzHeight]="25"
+      nzContent="Event Ended"
+      [nzFont]="font"
+      [nzRotate]='-7'
+      [nzGap]="[20, 20]"
+      [nzOffset]="[10, 10]"
+    >
+    <img
+    alt="{{ event.name }}"
+    [src]="getBase64ImageSrc(event.data!, event.contentType!)"
+  />
+    </nz-water-mark>
+      <img *ngIf="!eventHasEnded(event.endTime!)"
+          alt="{{ event.name }}"
+          [src]="getBase64ImageSrc(event.data!, event.contentType!)"
+        />
+    </ng-template>
+  </ng-container>
+</div>

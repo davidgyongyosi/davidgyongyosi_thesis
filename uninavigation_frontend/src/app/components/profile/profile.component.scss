@@ -1,0 +1,44 @@
+@import '../../../styles.scss';
+
+.info-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+
+    .info {
+        text-align: center;
+
+    }
+  }
+
+  .content-container {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 3em;
+  }
+
+  .user-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 5rem 1rem 5rem;
+    width: 100%;
+    align-items: center;
+    
+  }
+
+  .content-footer {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .inputs {
+    font-size: 12px;
+  }

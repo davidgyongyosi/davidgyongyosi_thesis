@@ -1,0 +1,56 @@
+<div class="m-5 p-5">
+  <p class="text-center text-3xl pb-11"> Create a new Event</p>
+<form nz-form [formGroup]="eventForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzFor]="'name'" nzRequired nzSpan="6">Name</nz-form-label>
+    <nz-form-control nzErrorTip="Please input the event name!" nzSpan="10">
+      <input nz-input formControlName="name" id="name" placeholder="Event Name"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzFor]="'startTime'" nzRequired nzSpan="6">Start Time</nz-form-label>
+    <nz-form-control nzErrorTip="Please select the start time!" nzSpan="10">
+      <nz-date-picker nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss" formControlName="startTime" id="startTime" placeholder="Select a start time" [nzDisabledDate]="disableStartDate"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzFor]="'endTime'" nzRequired nzSpan="6">End Time</nz-form-label>
+    <nz-form-control nzErrorTip="Please select the end time!" nzSpan="10">
+      <nz-date-picker nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss" formControlName="endTime" id="endTime" placeholder="End Time" [nzDisabledDate]="disableEndDate"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzFor]="'location'" nzRequired nzSpan="6">Location</nz-form-label>
+    <nz-form-control nzErrorTip="Please select the event location!" nzSpan="10">
+      <nz-select formControlName="location" id="location" [nzPlaceHolder]="'Location'" nzShowSearch>
+        <nz-option *ngFor="let location of locations" [nzValue]="location.id" [nzLabel]="location.name"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzFor]="'description'" nzRequired nzSpan="6">Description</nz-form-label>
+    <nz-form-control nzErrorTip="Please input the event description!" nzSpan="10">
+      <textarea nz-input formControlName="description" id="description" rows="3" placeholder="Description"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzFor]="'picture'" nzRequired nzSpan="6">Picture</nz-form-label>
+    <nz-form-control nzErrorTip="Please upload a picture!" nzSpan="10">
+        <!--<input type="file" formControlName="picture" id="picture" accept="image/*"/>-->
+        <input type="file" (change)="onFileSelected($event)" id="picture" accept="image/*" formControlName="picture"/>
+    </nz-form-control>
+</nz-form-item>
+
+  <nz-form-item>
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button nzType="primary">Create Event</button>
+      </nz-form-control>
+    </nz-form-item>
+</form>
+
+</div>

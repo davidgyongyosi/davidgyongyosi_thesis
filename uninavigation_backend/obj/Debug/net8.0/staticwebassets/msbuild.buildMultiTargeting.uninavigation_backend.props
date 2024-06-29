@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/uninavigation_backend.props" />
+</Project>

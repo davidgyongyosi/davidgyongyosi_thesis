@@ -1,0 +1,187 @@
+<div
+  *ngIf="isLoading"
+  class="absolute w-full h-full bg-slate-900 z-10 flex justify-center items-center pr-48 pb-32"
+>
+  <nz-spin nzTip="Loading map..." nzSize="large" class="w-full"></nz-spin>
+</div>
+
+<div id="map" #map>
+  <div class="overlay-container">
+    <div class="top flex flex-row justify-between">
+      <div class="search-bar flex flex-col gap-3 p-1 rounded-lg">
+        <div class="flex gap-3">
+          <nz-select
+            nzSize="large"
+            [(ngModel)]="endLocation"
+            nzPlaceHolder="Select end location"
+            nzAllowClear
+            class="w-72"
+            nzShowSearch
+            (ngModelChange)="onLocationSelected($event, 'end')"
+            disabled="{{isNavigating}}"
+          >
+            <nz-option
+              *ngFor="let location of locations"
+              [nzValue]="location"
+              [nzLabel]="location"
+            ></nz-option>
+          </nz-select>
+          <button
+            nzSize="large"
+            nz-button
+            nzType="primary"
+            *ngIf="endLocation"
+            (click)="showDirectionOptions = true"
+          >
+            Directions <span nz-icon nzType="right"></span>
+          </button>
+
+          <button
+            nzSize="large"
+            nz-button
+            nzType="text"
+            *ngIf="isNavigating"
+            (click)="clearNavigation()"
+          >
+            <span nz-icon nzType="clear" nzTheme="outline"></span>
+          </button>
+        </div>
+        <div
+          class="flex flex-col gap-4 pb-4 pl-2 pr-2"
+          *ngIf="showDirectionOptions"
+        >
+          <div class="flex flex-row justify-between">
+            <label class="text-lg">From:</label>
+            <nz-select
+              nzSize="large"
+              [(ngModel)]="startLocation"
+              nzPlaceHolder="Select start location"
+              nzAllowClear
+              class="w-72"
+              nzShowSearch
+              (ngModelChange)="onLocationSelected($event, 'start')"
+              disabled="{{isNavigating}}"
+            >
+              <nz-option
+                *ngFor="let location of locations"
+                [nzValue]="location"
+                [nzLabel]="location"
+              ></nz-option>
+            </nz-select>
+          </div>
+          <button
+            nz-button
+            nzType="primary"
+            (click)="navigate()"
+            nzSize="large"
+          >
+            Navigate
+          </button>
+          <button
+            nz-button
+            nzType="text"
+            (click)="showDirectionOptions = false"
+            nzSize="large"
+            nzBlock="true"
+          >
+            <span nz-icon nzType="up" nzTheme="outline"></span>
+          </button>
+        </div>
+      </div>
+      <div class="level-select p-1 rounded-lg">
+        <nz-select
+          nzSize="large"
+          [(ngModel)]="selectedFloor"
+          class="w-72"
+          nzPlaceHolder="Select a floor"
+          (ngModelChange)="changeFloor(selectedFloor)"
+        >
+          <nz-option
+            *ngFor="let floor of floors"
+            [nzValue]="floor.id"
+            [nzLabel]="floor.name"
+          ></nz-option>
+        </nz-select>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="admin-control">
+        <button nz-button nzType="primary" *ngIf="userIsAdmin" (click)="pushLocationsAndARContent()"> Push locations and AR content</button>
+      </div>
+      <div class="cam-controls">
+        <button
+          nz-button
+          nzType="primary"
+          nzShape="circle"
+          class="map-control"
+          data-action="pitch-up"
+          nzTooltipTitle="Pitch up"
+          nzTooltipPlacement="left"
+          nz-tooltip
+        >
+          <i nz-icon nzType="arrow-up" nzTheme="outline"></i>
+        </button>
+        <button
+          nz-button
+          nzType="primary"
+          nzShape="circle"
+          class="map-control"
+          data-action="pitch-down"
+          nzTooltipTitle="Pitch down"
+          nzTooltipPlacement="left"
+          nz-tooltip
+        >
+          <i nz-icon nzType="arrow-down" nzTheme="outline"></i>
+        </button>
+        <button
+          nz-button
+          nzType="primary"
+          nzShape="circle"
+          class="map-control"
+          data-action="bearing-left"
+          nzTooltipTitle="Rotate cam left"
+          nzTooltipPlacement="left"
+          nz-tooltip
+        >
+          <i nz-icon nzType="redo" nzTheme="outline"></i>
+        </button>
+        <button
+          nz-button
+          nzType="primary"
+          nzShape="circle"
+          class="map-control"
+          data-action="bearing-right"
+          nzTooltipTitle="Rotate cam right"
+          nzTooltipPlacement="left"
+          nz-tooltip
+        >
+          <i nz-icon nzType="undo" nzTheme="outline"></i>
+        </button>
+        <button
+          nz-button
+          nzType="primary"
+          nzShape="circle"
+          class="map-control"
+          data-action="zoom-in"
+          nzTooltipTitle="Zoom in"
+          nzTooltipPlacement="left"
+          nz-tooltip
+        >
+          <i nz-icon nzType="zoom-in" nzTheme="outline"></i>
+        </button>
+        <button
+          nz-button
+          nzType="primary"
+          nzShape="circle"
+          class="map-control"
+          data-action="zoom-out"
+          nzTooltipTitle="Zoom out"
+          nzTooltipPlacement="left"
+          nz-tooltip
+        >
+          <i nz-icon nzType="zoom-out" nzTheme="outline"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

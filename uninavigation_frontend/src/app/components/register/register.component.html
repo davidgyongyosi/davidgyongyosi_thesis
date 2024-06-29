@@ -1,0 +1,62 @@
+<form nz-form [formGroup]="RegisterForm" (ngSubmit)="register()">
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your first name!">
+      <nz-input-group nzPrefixIcon="user" nzSize="large">
+        <input nz-input formControlName="firstname" placeholder="First Name" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your last name!">
+      <nz-input-group nzPrefixIcon="user" nzSize="large">
+        <input nz-input formControlName="lastname" placeholder="Last Name" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your email!">
+      <nz-input-group nzPrefixIcon="mail" nzSize="large">
+        <input nz-input formControlName="email" placeholder="Email" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your username!">
+      <nz-input-group nzPrefixIcon="user" nzSize="large">
+        <input nz-input formControlName="username" placeholder="Username" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your password!">
+      <nz-input-group nzPrefixIcon="lock" nzSize="large">
+        <input
+          nz-input
+          type="password"
+          formControlName="password"
+          placeholder="Password"
+        />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <div class="other-options text-center">
+    <button
+      nz-button
+      nzType="primary"
+      [disabled]="RegisterForm.invalid"
+      nzSize="large"
+      class="register-button"
+    >
+      Register Now
+    </button>
+  </div>
+</form>
+<div class="mt-2">
+  <span>Have an account? </span>
+  <a nz-button nzType="link" class="ml-2" (click)="login()">Log in</a>
+</div>

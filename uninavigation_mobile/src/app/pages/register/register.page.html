@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="register()" [strong]="true">Register</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-input
+        [(ngModel)]="registerModel.username"
+        type="text"
+        label="Username"
+        labelPlacement="fixed"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        [(ngModel)]="registerModel.email"
+        type="email"
+        label="Email"
+        labelPlacement="fixed"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        [(ngModel)]="registerModel.firstname"
+        type="text"
+        label="First Name"
+        labelPlacement="fixed"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        [(ngModel)]="registerModel.lastname"
+        type="text"
+        label="Last Name"
+        labelPlacement="fixed"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        [(ngModel)]="registerModel.password"
+        type="password"
+        label="Password"
+        labelPlacement="fixed"
+      ></ion-input>
+    </ion-item>
+    <p *ngIf="registerFailed" style="color: red; padding-top: 15px;"></p>
+    </ion-list>
+  <div style="padding-top: 15px;">
+    <span>Have an account? </span>
+    <a (click)="login()">Log in</a>
+  </div>
+</ion-content>

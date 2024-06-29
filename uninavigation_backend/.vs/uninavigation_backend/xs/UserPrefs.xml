@@ -1,0 +1,45 @@
+﻿<Properties StartupConfiguration="{7BA59188-1911-45FE-A562-38248CEDA157}|http">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.uninavigation__backend PreferredExecutionTarget="/Applications/Firefox Developer Edition.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/ArContentController.cs">
+    <Files>
+      <File FileName="Models/DTOs/EventDTOs.cs" />
+      <File FileName="Controllers/EventController.cs" />
+      <File FileName="Program.cs" />
+      <File FileName="Models/DTOs/LocationDTO.cs" />
+      <File FileName="Models/Event.cs" Line="1" Column="1" />
+      <File FileName="Models/Ar-content.cs" Line="14" Column="2" />
+      <File FileName="Controllers/ArContentController.cs" Line="111" Column="70" />
+      <File FileName="Controllers/RolesController.cs" />
+      <File FileName="Controllers/AuthController.cs" Line="27" Column="40" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="uninavigation_backend">
+            <Node name="uninavigation_backend">
+              <Node name="Controllers">
+                <Node name="ArContentController.cs" selected="True" />
+              </Node>
+              <Node name="Logic" expanded="True">
+                <Node name="Classes" expanded="True" />
+              </Node>
+              <Node name="Models" expanded="True">
+                <Node name="DTOs" expanded="True" />
+              </Node>
+              <Node name="Repositories" expanded="True">
+                <Node name="Classes" expanded="True" />
+                <Node name="Interfaces" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>

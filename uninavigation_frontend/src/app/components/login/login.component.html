@@ -1,0 +1,39 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="login()">
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your username!">
+      <nz-input-group nzPrefixIcon="user" nzSize="large">
+        <input formControlName="userName" nz-input placeholder="Username" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your Password!">
+      <nz-input-group nzPrefixIcon="lock" nzSize="large">
+        <input
+          formControlName="password"
+          nz-input
+          type="password"
+          placeholder="Password"
+        />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button
+        nz-button
+        nzType="primary"
+        [disabled]="!validateForm.valid"
+        nzSize="large"
+        class="w-full"
+      >
+        Log in
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<p *ngIf="loginFailed" style="color: red">E-mail or password is incorrect</p>
+<div class="other-options">
+  <span>Don't have an account? </span>
+  <a nz-button nzType="link" class="ml-2" (click)="signup()">Sign up</a>
+</div>

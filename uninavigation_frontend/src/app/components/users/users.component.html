@@ -1,0 +1,31 @@
+<div class="m-5">
+  <nz-card nzTitle="User Management">
+    <nz-table #userTable [nzData]="tableData">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of userTable.data">
+            <td>{{ data.firstName }} {{ data.lastName }}</td>
+          <td>{{ data.email }}</td>
+            <td *ngFor="let role of data.roles">{{ role }}</td>
+          <td>
+            <button
+              nz-button
+              nzType="primary"
+              nzDanger
+              (click)="deleteUser(data.userId)"
+            >
+            Remove User
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-card>
+</div>

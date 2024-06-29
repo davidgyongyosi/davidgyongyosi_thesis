@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "ng-zorro-antd/ng-zorro-antd.dark.css";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+html, body {
+  overflow: hidden;
+}
+
+.anticon {
+  vertical-align: .125em !important;
+}
+
+.error-notification,
+.warning-notification,
+.info-notification,
+.success-notification {
+    color: white !important;
+}
+
+.error-notification {
+    background: #BD362F !important;
+}
+
+.warning-notification {
+    background: #F89406 !important;
+}
+
+.info-notification {
+    background: #2F96B4 !important;
+}
+
+.success-notification {
+    background: #51A351 !important;
+}
+
+.ant-notification-notice-icon-error,
+.ant-notification-notice-icon-success,
+.ant-notification-notice-icon-info,
+.ant-notification-notice-icon-warning,
+.ant-notification-notice-message {
+    color: white !important;
+}
+
+@import '@mappedin/mappedin-js/lib/index.css';

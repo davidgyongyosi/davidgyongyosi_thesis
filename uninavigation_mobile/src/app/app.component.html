@@ -1,0 +1,40 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Uni Navigator</ion-title>
+      <ion-buttons slot="end" *ngIf="!loggedIn">
+        <ion-button (click)="openLoginModal()">Login</ion-button>
+        <ion-button (click)="openRegisterModal()">Register</ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end" *ngIf="loggedIn">
+        <ion-button (click)="profileNavigate()">
+          <ion-icon name="person-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="logout()">
+          <ion-icon name="log-out-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home">
+        <ion-icon name="home-outline"></ion-icon>
+        Home
+      </ion-tab-button>
+      <ion-tab-button tab="map">
+        <ion-icon name="map-outline"></ion-icon>
+        Map
+      </ion-tab-button>
+      <ion-tab-button tab="events">
+        <ion-icon name="calendar-number-outline"></ion-icon>
+        Events
+      </ion-tab-button>
+      <ion-tab-button tab="arview">
+        <ion-icon name="glasses-outline"></ion-icon>
+        AR View
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-app>

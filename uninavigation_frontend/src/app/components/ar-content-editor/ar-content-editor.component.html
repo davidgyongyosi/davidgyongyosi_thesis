@@ -1,0 +1,45 @@
+<div
+  *ngIf="!contents"
+  class="absolute w-full h-full bg-slate-900 z-10 flex justify-center items-center pr-48 pb-32"
+>
+  <nz-spin nzTip="Loading AR contents..." nzSize="large" class="w-full"></nz-spin>
+</div>
+
+<div class="flex flex-col justify-center" *ngIf="contents">
+  <div class="p-4">
+    <input nz-input placeholder="Search by room name" [(ngModel)]="searchQuery" (ngModelChange)="filterContents()" />
+  </div>
+  <div class="flex flex-wrap gap-7 justify-evenly p-7">
+    <ng-container *ngFor="let content of currentContents">
+      <nz-card class="min-w-24">
+        <nz-card-meta
+          nzTitle="AR Content Details"
+          nzDescription="Details of the AR content in the specific room and position">
+        </nz-card-meta>
+        <div class="mt-4 mb-1 flex flex-col gap-4">
+          <p class="flex justify-between"><strong>ID:</strong> {{ content.id }}</p>
+          <p class="flex justify-between"><strong>Room:</strong> {{ content.roomName }}</p>
+          <p class="flex justify-between"><strong>Latitude:</strong> {{ content.latitude }}</p>
+          <p class="flex justify-between"><strong>Longitude:</strong> {{ content.longitude }}</p>
+          <p class="flex justify-between"><strong>Elevation:</strong> {{ content.elevation }}. floor</p>
+          <p *ngIf="content.content !== ''" class="flex justify-between"><strong>Content:</strong> {{ content.contentName }}</p>
+          <p *ngIf="content.content === ''" class="flex justify-between"><strong>Content:</strong>
+            <span style="color: rgba(255, 255, 255, 0.45);">No content yet..</span>
+          </p>
+          <nz-divider></nz-divider>
+          <div class="flex flex-row gap-4 justify-between">
+            <button nz-button nzType="primary" nzType="text" (click)="editContent(content)">
+              <span nz-icon nzType="edit" nzTheme="outline"></span> Edit
+            </button>
+            <button nz-button nzType="primary" nzDanger (click)="deleteContent(content.id)">
+              <span nz-icon nzType="delete" nzTheme="outline"></span> Delete
+            </button>
+          </div>
+        </div>
+      </nz-card>
+    </ng-container>
+  </div>
+  <div class="p-5 text-center">
+    <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="filteredContents!.length" [nzPageSize]="pageSize" (nzPageIndexChange)="changePage($event)"></nz-pagination>
+  </div>
+</div>

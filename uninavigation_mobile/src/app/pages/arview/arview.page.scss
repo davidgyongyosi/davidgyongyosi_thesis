@@ -1,0 +1,14 @@
+video#arjs-video {
+    position: absolute;  /* Ensures the video is positioned relative to the nearest positioned ancestor */
+    top: 0;              /* Aligns the top of the video with the top of the container */
+    left: 0;             /* Aligns the left of the video with the left of the container */
+    width: 100%;         /* Sets the video width to cover the container width */
+    height: 100%;        /* Sets the video height to cover the container height */
+    z-index: -1 !important;         /* Puts the video behind other content, adjust as necessary */
+    object-fit: cover;   /* Ensures the video covers the available space without being distorted */
+}
+
+ion-content {
+    position: relative; /* Makes ion-content a positioned ancestor for absolute positioning within it */
+    z-index: 1;         /* Ensures ion-content stays on top of the video element */
+}

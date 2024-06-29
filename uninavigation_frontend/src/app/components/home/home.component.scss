@@ -1,0 +1,43 @@
+@import '../../../styles.scss';
+
+.wrapper {
+    display: flex;
+    padding: 5em;
+    gap: 2em;
+    flex-wrap: wrap;
+
+    .text-wrapper {
+        flex: 1 1 50%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: flex-start;
+        align-content: flex-start;
+        flex-direction: column;
+        max-width: 40vw;
+        gap: 2em;
+        padding-left: 1em;
+
+        .title > *{
+            font-size: 42px;
+        }
+        
+        p {
+            font-size: 18px;
+            font-family: 'GeneralSans-Regular';
+        }
+    }
+
+    .hero-wrapper {
+        flex: 1 1 50%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.text-gradient {
+    background: linear-gradient(30deg, #C0B7E8, #8176AF);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
